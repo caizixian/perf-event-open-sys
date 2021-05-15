@@ -5,7 +5,7 @@ use std::path::PathBuf;
 
 fn main() {
     let out_path = PathBuf::from(env::var("OUT_DIR").unwrap());
-    let here_file = PathBuf::from(file!()).canonicalize().unwrap();
+    let here_file = PathBuf::from(env::var("PWD").unwrap()).join(file!());
     let here = here_file.parent().unwrap();
 
     let header = &here.join("wrapper.h");
