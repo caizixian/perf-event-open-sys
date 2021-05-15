@@ -212,7 +212,7 @@ pub mod ioctls {
     //! On error, these return `-1` and set the C `errno` value.
     //!
     //! [man]: http://man7.org/linux/man-pages/man2/perf_event_open.2.html
-    use crate::bindings::{self, perf_event_attr, perf_event_query_bpf};
+    use crate::bindings;
     use std::os::raw::{c_char, c_int, c_uint, c_ulong};
 
     macro_rules! define_ioctls {
@@ -242,8 +242,6 @@ pub mod ioctls {
         { ID, perf_event_ioctls_ID, *mut u64 }
         { SET_BPF, perf_event_ioctls_SET_BPF, u32 }
         { PAUSE_OUTPUT, perf_event_ioctls_PAUSE_OUTPUT, u32 }
-        { QUERY_BPF, perf_event_ioctls_QUERY_BPF, *mut perf_event_query_bpf }
-        { MODIFY_ATTRIBUTES, perf_event_ioctls_MODIFY_ATTRIBUTES, *mut perf_event_attr }
     }
 
     unsafe fn untyped_ioctl<A>(
